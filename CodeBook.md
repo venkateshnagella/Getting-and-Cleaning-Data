@@ -1,50 +1,154 @@
-Source of the original data: https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip . Original description: http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+CODE BOOK The dataset includes the following files:
 
-The attached R script (run_analysis.R) performs the following to clean up the data:
+-tidyData.txt - data set attaches for the submission -run_analysis.r - r code to obtain "tidyData.txt"" -README.MD - steps in "run_analysis.r"" -CodeBook.md
 
-1. Merges the training and test sets to create one data set, namely
-train/X_train.txt with test/X_test.txt -- the result is a 10299 x 561 data frame, as in the original description ("Number of Instances: 10299" and "Number of Attributes: 561")
+Original data https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip full description http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
 
-train/subject_train.txt with test/subject_test.txt -- the result is a 10299 x 1 data frame with subject IDs,
+STUDY DESIGN - Data and transformation
 
-train/y_train.txt with test/y_test.txt -- the result is also a 10299 x 1 data frame with activity IDs.
+DATA The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data.
 
-2. Reads file features.txt and extracts only the measurements on the mean and standard deviation for each measurement.
-The result is a 10299 x 66 data frame, because only 66 out of 561 attributes are measurements on the mean and standard deviation. All measurements appear to be floating point numbers in the range (-1, 1).
+The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain. See 'features_info.txt' for more details.
 
-3. Reads activity_labels.txt and applies descriptive activity names to name the activities in the data set:
-walking
+For each record it is provided:
+Triaxial acceleration from the accelerometer (total acceleration) and the estimated body acceleration.
+Triaxial Angular velocity from the gyroscope.
+A 561-feature vector with time and frequency domain variables.
+Its activity label.
+An identifier of the subject who carried out the experiment.
+The dataset includes the following files:
+'README.txt'
 
-walkingupstairs
+'features_info.txt': Shows information about the variables used on the feature vector.
 
-walkingdownstairs
+'features.txt': List of all features.
 
-sitting
+'activity_labels.txt': Links the class labels with their activity name.
 
-standing
+'train/X_train.txt': Training set.
 
-laying
+'train/y_train.txt': Training labels.
 
-4. The script also appropriately labels the data set with descriptive names: all feature names (attributes) and activity names are converted to lower case, underscores and brackets () are removed.
-Then it merges the 10299x66 data frame containing features with 10299x1 data frames containing activity labels and subject IDs.
+'test/X_test.txt': Test set.
 
-The result is saved as merged_clean_data.txt, a 10299x68 data frame such that the first column contains subject IDs, the second column activity names, and the last 66 columns are measurements. Subject IDs are integers between 1 and 30 inclusive. Names of the attributes are similar to the following:
+'test/y_test.txt': Test labels.
 
-tbodyacc-mean-x
+The following files are available for the train and test data. Their descriptions are equivalent.
 
-tbodyacc-mean-y
+'train/subject_train.txt': Each row identifies the subject who performed the activity for each window sample. Its range is from 1 to 30.
 
-tbodyacc-mean-z
+'train/Inertial Signals/total_acc_x_train.txt': The acceleration signal from the smartphone accelerometer X axis in standard gravity units 'g'. Every row shows a 128 element vector. The same description applies for the 'total_acc_x_train.txt' and 'total_acc_z_train.txt' files for the Y and Z axis.
 
-tbodyacc-std-x
+'train/Inertial Signals/body_acc_x_train.txt': The body acceleration signal obtained by subtracting the gravity from the total acceleration.
 
-tbodyacc-std-y
+'train/Inertial Signals/body_gyro_x_train.txt': The angular velocity vector measured by the gyroscope for each window sample. The units are radians/second.
 
-tbodyacc-std-z
+Notes:
+Features are normalized and bounded within [-1,1].
+Each feature vector is a row on the text file.
+For more information about this dataset contact: activityrecognition@smartlab.ws
 
-tgravityacc-mean-x
+The features selected for this database come from selection and transformation of the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz.
 
-tgravityacc-mean-y
+Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag).
 
-5. Finally, the script creates a 2nd, independent tidy data set with the average of each measurement for each activity and each subject.
-The result is saved as data_set_with_the_averages.txt, a 180x68 data frame, where as before, the first column contains subject IDs, the second column contains activity names (see below), and then the averages for each of the 66 attributes are in columns 3...68. There are 30 subjects and 6 activities, thus 180 rows in this data set with averages.
+Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals).
+
+These signals were used to estimate variables of the feature vector for each pattern:
+'-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
+
+tBodyAcc-XYZ tGravityAcc-XYZ tBodyAccJerk-XYZ tBodyGyro-XYZ tBodyGyroJerk-XYZ tBodyAccMag tGravityAccMag tBodyAccJerkMag tBodyGyroMag tBodyGyroJerkMag fBodyAcc-XYZ fBodyAccJerk-XYZ fBodyGyro-XYZ fBodyAccMag fBodyAccJerkMag fBodyGyroMag fBodyGyroJerkMag
+
+The set of variables that were estimated from these signals are:
+
+mean(): Mean value std(): Standard deviation mad(): Median absolute deviation max(): Largest value in array min(): Smallest value in array sma(): Signal magnitude area energy(): Energy measure. Sum of the squares divided by the number of values. iqr(): Interquartile range entropy(): Signal entropy arCoeff(): Autorregresion coefficients with Burg order equal to 4 correlation(): correlation coefficient between two signals maxInds(): index of the frequency component with largest magnitude meanFreq(): Weighted average of the frequency components to obtain a mean frequency skewness(): skewness of the frequency domain signal kurtosis(): kurtosis of the frequency domain signal bandsEnergy(): Energy of a frequency interval within the 64 bins of the FFT of each window. angle(): Angle between to vectors.
+
+Additional vectors obtained by averaging the signals in a signal window sample. These are used on the angle() variable:
+
+gravityMean tBodyAccMean tBodyAccJerkMean tBodyGyroMean tBodyGyroJerkMean
+
+TRANFORMATION The dataset "tidyData.txt" is obtanined transforming and merging data "train" and "test"(run_analysis.r) In particular the procedure merges the training and the test sets to create one data set, extracts only the measurements on the mean and standard deviation for each measurement, uses descriptive activity names to name the activities in the data set and appropriately labels the data set with descriptive variable names. Creates a tidy data set "tidyData.txt" contaninig the average of each variable for each activity and each subject.
+
+VARIABLES "tidyData.txt" variables are the following. In particular "subjects" are the subject who performed the activity "activity" for each window sample. The other variables are the aggrated mean (for activity and subject) of the mean and standard deviation variables in the original data set variables described in "features.txt". The "acivity" values in the original data set has been replaced with the description provided in "activity_labels.txt".
+
+"subject"
+"activity"
+"tBodyAcc.mean()X"
+tBodyAcc.mean()Y"
+"tBodyAcc.mean()Z"
+tGravityAcc.mean()X"
+"tGravityAcc.mean()Y"
+"tGravityAcc.mean()Z"
+"tBodyAccJerk.mean()X"
+"tBodyAccJerk.mean()Y"
+"tBodyAccJerk.mean()Z"
+"tBodyGyro.mean()X"
+"tBodyGyro.mean()Y"
+"tBodyGyro.mean()Z"
+"tBodyGyroJerk.mean()X"
+"tBodyGyroJerk.mean()Y"
+"tBodyGyroJerk.mean()Z"
+"tBodyAccMag.mean()"
+"tGravityAccMag.mean()"
+"tBodyAccJerkMag.mean()"
+"tBodyGyroMag.mean()"
+"tBodyGyroJerkMag.mean()"
+"fBodyAcc.mean()X"
+fBodyAcc.mean()Y"
+"fBodyAcc.mean()Z"
+"fBodyAcc.meanFreq()X"
+"fBodyAcc.meanFreq()Y"
+"fBodyAcc.meanFreq()Z"
+"fBodyAccJerk.mean()X"
+"fBodyAccJerk.mean()Y"
+"fBodyAccJerk.mean()Z"
+"fBodyAccJerk.meanFreq()X"
+"fBodyAccJerk.meanFreq()Y"
+"fBodyAccJerk.meanFreq()Z"
+"fBodyGyro.mean()X"
+"fBodyGyro.mean()Y"
+"fBodyGyro.mean()Z"
+"fBodyGyro.meanFreq()X" "
+fBodyGyro.meanFreq()Y"
+"fBodyGyro.meanFreq()Z"
+"fBodyAccMag.mean()"
+"fBodyAccMag.meanFreq()"
+"fBodyBodyAccJerkMag.mean()"
+"fBodyBodyAccJerkMag.meanFreq()"
+"fBodyBodyGyroMag.mean()"
+"fBodyBodyGyroMag.meanFreq()"
+"fBodyBodyGyroJerkMag.mean()"
+"fBodyBodyGyroJerkMag.meanFreq()"
+"tBodyAcc.std()X"
+"tBodyAcc.std()Y"
+"tBodyAcc.std()Z"
+"tGravityAcc.std()X"
+"tGravityAcc.std()Y"
+"tGravityAcc.std()Z"
+"tBodyAccJerk.std()X"
+"tBodyAccJerk.std()Y"
+"tBodyAccJerk.std()Z"
+"tBodyGyro.std()X"
+"tBodyGyro.std()Y"
+"tBodyGyro.std()Z"
+"tBodyGyroJerk.std()X"
+"tBodyGyroJerk.std()Y"
+"tBodyGyroJerk.std()Z"
+"tBodyAccMag.std()"
+"tGravityAccMag.std()"
+"tBodyAccJerkMag.std()"
+"tBodyGyroMag.std()"
+"tBodyGyroJerkMag.std()"
+"fBodyAcc.std()X"
+"fBodyAcc.std()Y"
+"fBodyAcc.std()Z"
+"fBodyAccJerk.std()X"
+"fBodyAccJerk.std()Y"
+"fBodyAccJerk.std()Z"
+"fBodyGyro.std()X"
+"fBodyGyro.std()Y"
+"fBodyGyro.std()Z"
+"fBodyAccMag.std()"
+"fBodyBodyAccJerkMag.std()"
+"fBodyBodyGyroMag.std()"
+"fBodyBodyGyroJerkMag.std()"
