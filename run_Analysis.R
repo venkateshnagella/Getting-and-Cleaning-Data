@@ -79,4 +79,4 @@ names(tidydata2)[2] <- "Activity"
 
 ## exporting final dataset
 
-write.table(tidydata2, "../tidydata.txt", sep="\t" )
+write.table(tidydata2, "../tidyData.txt", sep="\t" )
