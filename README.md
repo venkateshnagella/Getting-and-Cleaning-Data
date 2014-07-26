@@ -1,35 +1,20 @@
-##Reading features and activity labels
+README FILE
 
-Read features and activity labels into R environment.
+This file contains analysis steps followed in “run_analysis.R” which analyses Samsung data (provided in Course Project – Getting Cleaning Data - Coursera - http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones) and creates a new data set “tidyData” following the instructions required by the assigment. Information about variables, data and trasfomations are available “Codebook.md".
 
-##Preparing train dataset by using cbind
+“run_analysis.R”
 
-Read three train datasets into R environment. Lable the train dataset using features provided. Merge the three datasets to get the final train dataset using cbind function.
+1) Merges the training and the test sets to create one data set. Read files in folder “test” and “train” and create two dataframes “train_data” and “test_data”. Create a complete dataset “data” merging “train_data” and “test_data”.
 
-##Preparing test dataset by using cbind
+2) Extracts only the measurements on the mean and standard deviation for each measurement by using grep function and creating tidydata1 data set. 
 
-Read three test datasets into R environment. Lable the test dataset using features provided. Merge the three datasets to get the final test dataset using cbind function.
+3) Naming the activities in the dataset by using descriptive activitiy names. 
 
-##Preparing the final dataset
 
-Merge train and test datasets using rbind function to create final dataset.
+4) Appropriately labels the data set with descriptive variable names.
 
-##Extracting the measurements only on the mean and standard deviation for each measurement
 
-Filter the dataset to get subset of the dataset that contains columns with mean and starndard deviation. Create tidydataset using cbind.
+5) Creates a second, independent tidy data set with the average of each variable for each activity and each subject. Using the function “aggregate” on “tidydata1” calculates the average of each variable grouping by activity and subject.
 
-##Using the descriptive activity names to name the activities in the data set
 
-Find the index of each activity and rename it with descriptive name from activity lables that are loaded.
-
-##Labeling the data set with descriptive variable names
-
-Rename the columns with descriptive names.
-
-##Creating the second, independent tidy data set with the average(mean) of each variable for each activity and each subject
-
-Create the final tidy dataset by calculating the average by grouping activity and subject using aggregate function.
-
-##Exporting final dataset
-
-Export the final dataset into text file using write.table function.
+Creates a new file containing the tidy dataset (tidyData.txt)
