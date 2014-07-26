@@ -1,5 +1,5 @@
 ## setting the working directory
-setwd("/home/suresh/Suresh/R Coursera/assignments/data/UCI HAR Dataset")
+setwd("E://Projects/Coursera/3. Getting and Cleaning Data/Assignments/UCI HAR Dataset")
 
 
 ## Reading features and activity labels
